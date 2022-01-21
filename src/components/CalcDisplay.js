@@ -2,13 +2,11 @@ import React, { useContext } from 'react';
 import '../Styles.css';
 import { CalcContext } from '../CalcContext';
 
-const CalcKeyOperators = ({ valueKey }) => {
-
+const CalcDisplay = () => {
   const { display, results, operation, evtHandler } = useContext(CalcContext);
+  const newDisplay = display ? display : '0';
 
-  return (
-    <button name={valueKey} className='button-operators' onClick={evtHandler}>{valueKey}</button>
-  )
+  return <div className='display'>{newDisplay}</div>;
 };
 
-export default CalcKeyOperators;
+export default CalcDisplay;

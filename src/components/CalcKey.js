@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../Styles.css';
+import { CalcContext } from '../CalcContext';
 
-const CalcKey = ({ evtHandler, valueKey }) => {
+const CalcKey = ({ valueKey }) => {
 
-  const handleClick = () => {
-    evtHandler({ keyPress: valueKey });
-  }
+  const { display, results, operation, evtHandler } = useContext(CalcContext);
 
-  return <button onClick={handleClick}>{valueKey}</button>
+  return (
+    <button name={valueKey} onClick={evtHandler}>{valueKey}</button>
+  )
 };
 
 export default CalcKey;
