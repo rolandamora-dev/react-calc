@@ -27,34 +27,3 @@ export const Operation = {
   'Ops_Divide': '÷',
   'Ops_Equals': '='
 }
-
-export function getDisplay(prevValue, valueKey, operation, firstOperand) {
-  // if (parseFloat(prevValue) > 0 || operation.trim().length > 0) {
-  //   return prevValue.concat(valueKey);
-  // } else {
-  //   return valueKey;
-  // }
-  // if (operation.trim().length > 0) {
-  //   return valueKey;
-  // } else if (parseFloat(prevValue) > 0) {
-  //   return prevValue.concat(valueKey);
-  // } else {
-  //   return valueKey;
-  // }
-
-  if (operation.trim().length > 0) {
-    if (firstOperand.trim().length > 0) {
-
-    }
-  } else {
-    if (parseFloat(prevValue) > 0) {
-      return prevValue.concat(valueKey);
-    } else {
-      return valueKey;
-    }
-  }
-}
-
-export function getOperation() {
-
-}

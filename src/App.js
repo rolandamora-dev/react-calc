@@ -5,7 +5,6 @@ import { Keys } from './utils';
 import CalcKeySpan from './components/CalcKeySpan';
 import CalcProvider from './CalcContext';
 import CalcDisplay from './components/CalcDisplay';
-import CalcOperand from './components/CalcOperand';
 
 function App() {
 
@@ -13,7 +12,6 @@ function App() {
     <div className='calculator-grid'>
       <CalcProvider>
         <div className='output'>
-          <CalcOperand />
           <CalcDisplay />
         </div>
         <CalcKey valueKey={Keys.AC} />

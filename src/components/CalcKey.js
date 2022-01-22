@@ -6,33 +6,57 @@ import { Keys } from '../utils';
 const CalcKey = ({ valueKey }) => {
 
   const [key, setKey] = useState('');
-  const { display, results, operation, evtHandler, setDisplay, displayReset, setDisplayReset } = useContext(CalcContext);
+  const { display, results, operation, evtHandler, setDisplay, displayReset, setDisplayReset, setResults, setOperation } = useContext(CalcContext);
 
   const clickCallback = useCallback((event) => {
     setKey(valueKey);
-    setDisplay(prevVal => {
-      if (valueKey === Keys.AC) {
-        return '0';
+
+    if (valueKey === Keys.AC) {
+      setResults('');
+      setOperation('');
+      setDisplay('0');
+    } else if (valueKey === Keys.Percent) {
+      setDisplay(oVal => {
+        return oVal / 100;
+      });
+    } else if (valueKey === Keys.MoreOrLess) {
+      setDisplay(oVal => {
+        return (oVal) * -1;
+      });
+    }
+    else if (valueKey === Keys.Dot) {
+      if (displayReset) {
+        setDisplayReset(false);
+        return valueKey;
+      } else {
+        setDisplay(oVal => {
+          if (!(oVal.trim().includes(valueKey))) {
+            if (parseFloat(oVal) === 0) {
+              return valueKey;
+            } else {
+              return oVal.concat(valueKey);
+            }
+          } else {
+            return oVal;
+          }
+        });
       }
-      else if (valueKey === Keys.Dot) {
-        if (!prevVal.trim().includes(valueKey)) {
-          if (parseFloat(prevVal) === 0) {
+    } else {
+      if (displayReset) {
+        setDisplay(valueKey);
+        setDisplayReset(false);
+      } else {
+        setDisplay(oVal => {
+          if (oVal.trim() === Keys.Dot) {
+            return oVal.concat(valueKey);
+          } else if (parseFloat(oVal) === 0) {
             return valueKey;
           } else {
-            return prevVal.concat(valueKey);
+            return oVal.concat(valueKey);
           }
-        } else {
-          return prevVal;
-        }
+        });
       }
-      else {
-        if (parseFloat(prevVal) === 0) {
-          return valueKey;
-        } else {
-          return prevVal.concat(valueKey);
-        }
-      }
-    });
+    }
   }, [key]);
 
   return (
